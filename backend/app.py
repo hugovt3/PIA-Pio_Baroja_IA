@@ -18,7 +18,7 @@ def test_ollama():
         ),
         "stream": False
     }
-
+    
     response = requests.post(url, json=payload)
     data = response.json()
 

@@ -4,8 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscador de cargos</title>
+    <link rel="icon" href="Images/Logo.jpg" type="image/x-icon">
 </head>
 <body>
-    // seguir aqui
+    <h1>Sube tu PDF/s</h1>
+    <!--Formulario basico para introducir los pdfs
+        FORM:
+        -1º: action -> /upload para que envie los archivos a la ruta /upload
+        -2º: enctype -> multipart/form-data para que el formulario pueda manejar archivos
+        INPUT:
+        -1º: type -> file para que solo deje meter archivos
+        -2º: accept -> para que solo deje meter archivos pdf
+        -3º: multiple -> para que deje meter varios archivos a la vez
+        -4º: required -> para que no deje enviar el formulario sin archivos
+    -->
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        
+        <label for="pdfs">Selecciona uno o varios PDF:</label><br></br>
+        <input 
+        type="file" 
+        id="pdfs" 
+        name="pdfs"
+        accept="application/pdf"
+        multiple
+        required
+        >
+        
+        <br><br>
+
+        <button type="submit">Subir PDFs</button>
+
+    </form>
 </body>
 </html>
