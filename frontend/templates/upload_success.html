@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carga Exitosa</title>
+    <link rel="stylesheet" href="/styles/style_upload_success.css">
+</head>
+<body>
+    <div class="container">
+        <div class="checkmark">✓</div>
+        <h1>¡PDFs subidos correctamente!</h1>
+        <p>Archivos guardados:</p>
+        <ul>
+            {% for archivo in archivos %}
+            <li>{{ archivo }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/">Volver al inicio</a>
+    </div>
+</body>
+</html>
