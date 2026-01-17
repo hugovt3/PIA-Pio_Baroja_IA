@@ -8,22 +8,25 @@ cursor = conexion.cursor() # crear un cursor para ejecutar comandos SQL
 
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS documents (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
     filename TEXT,
-    path TEXT,
-    uploaded_at TEXT
+    fecha_subida DATETIME DEFAULT CURRENT_TIMESTAMP
 )
 """)
 
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS chunks (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
     document_id INTEGER,
-    text TEXT,
-    page_number INTEGER,
+    chunk_text TEXT, 
+    chunk_vector INTEGER, 
     FOREIGN KEY(document_id) REFERENCES documents(id)
 )
 """)
+
+# chunk_text-> Almacena el vector del chunk para búsquedas vectoriales
+# chunk_vector-> Almacena el texto del chunk
+
 
 conexion.commit()
 conexion.close()
