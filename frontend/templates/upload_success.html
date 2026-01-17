@@ -3,6 +3,7 @@
 <head>
     <title>Carga Exitosa</title>
     <link rel="stylesheet" href="/styles/style_upload_success.css">
+    <link rel="icon" href="/Images/Correct.png" type="image/x-icon">
 </head>
 <body>
     <div class="container">
@@ -10,8 +11,8 @@
         <h1>¡PDFs subidos correctamente!</h1>
         <p>Archivos guardados:</p>
         <ul>
-            {% for archivo in archivos %}
-            <li>{{ archivo }}</li>
+            {% for a in archivos %}
+            <li>{{ a }}</li>
             {% endfor %}
         </ul>
         <a href="/">Volver al inicio</a>

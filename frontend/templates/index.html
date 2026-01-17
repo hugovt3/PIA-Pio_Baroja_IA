@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Buscador de cargos</title>
+    <title>Subida de PDFs</title>
     <link rel="stylesheet" href="/styles/style_index.css">
     <script src="/script.js"></script>
     <link rel="icon" href="/Images/Logo.jpg" type="image/x-icon">
@@ -24,7 +24,7 @@
         -->
         <form action="/upload" method="post" enctype="multipart/form-data">
             
-            <label for="pdfs">Selecciona uno o varios PDF:</label>
+            <label>Selecciona uno o varios PDF:</label>
             <input 
             type="file" 
             id="pdfs" 
@@ -35,6 +35,7 @@
             >
             
             <button type="submit">Subir PDFs</button>
+            <button type="button" onclick="LimpiarSubida()">Limpiar selección</button>
 
         </form>
 

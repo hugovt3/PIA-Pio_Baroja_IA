@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, send_from_directory, request, render_template
 import requests
 import os
+from Conexion_DB import get_connection #Importar el metodo para conetarse a la BBDD y poder reutilizar la misma conexión
 
 app = Flask(
         __name__,
@@ -44,6 +45,12 @@ def upload_pdfs():
 
     return render_template("upload_success.html", archivos=saved_files)
 
+#--------------------------
+#Ruta de preguntas a ollama (Proceso en desarrollo)
+#-------------------------- 
+"""@app.route("/ask",methods=["POST"])
+def ask
+"""
 
 
 
