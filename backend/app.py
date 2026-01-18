@@ -2,6 +2,7 @@ from flask import Flask, jsonify, send_from_directory, request, render_template
 import requests
 import os
 from Conexion_DB import get_connection #Importar el metodo para conetarse a la BBDD y poder reutilizar la misma conexión
+from pdfplumber import PDF # Importar pdfplumber para el procesamiento de PDFs (a implementar)
 
 app = Flask(
         __name__,
@@ -49,10 +50,23 @@ def upload_pdfs():
         # Insertar información del archivo en la base de datos TABLA DE DOCUMENTS
         Conexion_cursor.execute("""
             INSERT INTO documents (filename) VALUES (?)
-        """, (pdf.filename))
-        # Insertar en la tabla chunks se hará después del procesamiento del PDF
-        
+        """, (pdf.filename,))
 
+        #------------------------
+        # Insertar en la tabla chunks se hará después del procesamiento del PDF
+        #------------------------
+
+        #PASO 1: Conseguir el ID del documento insertado en documents
+        Id_document = Conexion_cursor.lastrowid  
+        #PASO 2: Crear chunks asociados a este documento con pdfplumber
+        
+        #PASO 3: Generar vectores con sentence-transformers para cada chunk de pdfplumber
+        #PASO 4: Hacer el insert en la base de datos sobre la tabla chunks con los valores conseguidos en los pasos anteriores
+        
+        #Conexion_cursor.execute("""
+        #    INSERT INTO chunks (document_id), (chunk_text), (chunk_vector) VALUES (?), (?) , (?)
+        #""", (Id_document), None, None)
+        
 
         # Guardar la información del archivo en la base de datos
         saved_files.append(pdf.filename)
