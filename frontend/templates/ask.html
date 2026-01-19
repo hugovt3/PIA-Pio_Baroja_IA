@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIA - Chat</title>
+    <link rel="icon" href="/Images/Logo.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/style_ask.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Haz una pregunta a PIA</h1>
+        <form id="preguntar-form">
+            <label for="pregunta">Pregunta:</label>
+            <input type="text" id="pregunta" name="pregunta" required>
+            <button type="submit">Enviar</button>
+        </form>
+        <div id="response-section">
+            <h2>Respuesta de PIA:</h2>
+            <p id="respuesta"></p>
+
+        </div>
+        <a href="/"><button>Volver</button></a>
+    </div>
+    <script src="../scripts/script_ask.js"></script>
+</body>
+</html>

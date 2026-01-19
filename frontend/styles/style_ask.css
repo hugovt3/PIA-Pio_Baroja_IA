@@ -1,0 +1,108 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ----------------------------
+   Contenedor central
+---------------------------- */
+.container {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* ----------------------------
+   Titulos
+---------------------------- */
+h1 {
+    margin-bottom: 20px;
+    color: #667eea;
+}
+
+h2 {
+    margin-top: 30px;
+    color: #555;
+    font-size: 1.1em;
+}
+
+/* ----------------------------
+   Formulario
+---------------------------- */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+label {
+    text-align: left;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"] {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+/* ----------------------------
+   Botones
+---------------------------- */
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* Botón principal de enviar */
+button[type="submit"] {
+    background-color: #6b5bff; /* azul morado */
+    color: white;
+}
+
+button[type="submit"]:hover {
+    background-color: #5a48e0;
+}
+
+/* Respuesta */
+#response-section {
+    margin-top: 20px;
+    text-align: left;
+}
+
+#respuesta {
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-radius: 8px;
+    min-height: 40px;
+}
+
+/* ----------------------------
+   Botones secundarios (si existen)
+---------------------------- */
+button.secondary {
+    background-color: #28a745; /* verde */
+    color: white;
+}
+
+button.secondary:hover {
+    background-color: #218838;
+}
