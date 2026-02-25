@@ -88,10 +88,17 @@ Usaremos el link que nos proporciona el mensaje para abrir el puerto en cualquie
 Y deberiamos ver nuestra aplicación funcionando correctamente
 
 ## 3. Especificaciones/Datos Extras del proyecto
+### Módelo Base de datos
+![Modelo Base de datos (BBDD)](frontend/Images/BBDD_esquema.jpg)
+
+Modelo Mínimo en 2FN
+
 ### Datos de PDF`S
 Los PDF`S subidos a la app los podrás encontrar en la carpeta docs, se ira actualizando según vayas subiendo documentos, si por error borra alguno, no se preocupe, **SOLO LA INFORMACIÓN** seguirá guardada en la BBDD
 ### Tecnologías utilizadas
 Python: BACK-END
+
+SQLite: DataBase
 
 HTML-CCS-JS: FRONT-END
 
