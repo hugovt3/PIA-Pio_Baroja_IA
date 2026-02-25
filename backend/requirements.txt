@@ -1,7 +1,8 @@
 flask
+requests
 PyPDF2
 pdfplumber
 sentence-transformers
 faiss-cpu
 numpy
-
+sqlite3
