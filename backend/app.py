@@ -2,11 +2,14 @@ from flask import Flask, jsonify, send_from_directory, request, render_template
 import requests
 import os
 from Conexion_DB import get_connection #Importar el metodo para conetarse a la BBDD y poder reutilizar la misma conexión
+from Iniciar_BBDD import inicializar_bd #Importar función para crear BBDD si no existe
 import pdfplumber # Importar pdfplumber para el procesamiento de PDFs (a implementar)
 from Creador_chunks import crear_chunk # Importar la función para crear chunks de texto
 from sentence_transformers import SentenceTransformer #Creador de vectores
 import numpy as np #importar numpy para hacer transformaciones en los vectores y que faiss pueda aceptarlos
 import faiss #importar faiss para la búsqueda de similitud entre vectores
+
+inicializar_bd()
 
 app = Flask(
         __name__,

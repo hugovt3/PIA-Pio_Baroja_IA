@@ -61,7 +61,11 @@ Una vez dentro utilizaremos el comando:
 pip install -r requirements.txt
 ```
 Cuando finalice, habremos descargado todas las bibliotecas de python necesarias.
-### C) Iniciar la app
+
+### C) Iniciar la app (NEW)
+Ejecutar run_app.bat (puede tardar un poco al cargar la app en el navegador, esperar a que se recargue sola)
+
+### C) Iniciar la app (OLD)
 
 Para iniciar la app, volveremos a la carpeta de backend, y ejecutamos el programa que inicia la página web en local con el siguiente comando:
 ```
