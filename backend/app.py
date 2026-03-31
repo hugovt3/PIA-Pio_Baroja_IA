@@ -2,11 +2,12 @@ from flask import Flask, jsonify, send_from_directory, request, render_template
 import requests
 import os
 from Conexion_DB import get_connection #Importar el metodo para conetarse a la BBDD y poder reutilizar la misma conexión
-import pdfplumber # Importar pdfplumber para el procesamiento de PDFs (a implementar)
 from Creador_chunks import crear_chunk # Importar la función para crear chunks de texto
+import pymupdf4llm
 from sentence_transformers import SentenceTransformer #Creador de vectores
 import numpy as np #importar numpy para hacer transformaciones en los vectores y que faiss pueda aceptarlos
 import faiss #importar faiss para la búsqueda de similitud entre vectores
+from pathlib import Path
 
 app = Flask(
         __name__,
@@ -90,23 +91,38 @@ def upload_pdfs():
         #PASO 1: Conseguir el ID del documento insertado en documents
         Id_document = Conexion_cursor.lastrowid  
 
-        #PASO 2: Analizar documento con pdfplumber
-        text = ""
-        with pdfplumber.open(save_path) as pdf_documento:
-            for pagina in pdf_documento.pages:
-                page_text = pagina.extract_text()
-                if not page_text:
-                    continue
+        #PASO 2: Analizar documento con docling
+        # Asumimos que save_path es la ruta al PDF (str o Path)
+        # save_path es tu ruta completa al PDF
+        pdf_path = Path(save_path)
 
-                page_text = page_text.replace("\n", " ")
-                page_text = " ".join(page_text.split())  # elimina espacios dobles
+        try:
+            # Convierte TODO el PDF a Markdown de una sola vez (la forma más recomendada)
+            md_text = pymupdf4llm.to_markdown(
+                pdf_path,
+                # Opciones útiles para BOCM (ajusta según necesites)
+                pages=None,               # None = todas las páginas
+                hdr_info=True,            # detecta encabezados → #, ##, etc.
+                table_strategy="lines_strict",  # mejora tablas en docs con líneas
+                write_images=False,       # no extrae imágenes (más rápido y liviano)
+                margins=(50, 50, 50, 50), # evita bordes raros en columnas
+            )
 
-                text += page_text + " "
+            # Limpieza ligera similar a la tuya
+            md_text = md_text.replace("\n\n\n", "\n\n")   # reduce saltos excesivos
+            md_text = " ".join(md_text.split())           # colapsa espacios en líneas
+            md_text = md_text.replace(" . ", ". ").strip()
 
-        #PASO 3: Crear chunks asociados a este documento con lo analizado de pdfplumber poniendole yo un limite de caracteres a cada chunk (funcion creada en Creador_chunks.py)
+            text = md_text
+
+        except Exception as e:
+            print(f"Error al procesar con pymupdf4llm: {e}")
+            text = ""  # fallback
+
+        # Ahora pasas a chunks como antes
         Chunks = crear_chunk(text)
 
-        #PASO 4: Generar vectores con sentence-transformers para cada chunk de pdfplumber
+        #PASO 4: Generar vectores con sentence-transformers para cada chunk de docling
         
         Chunks_vectores = model.encode(Chunks)  # Generar vectores para los chunks
         #PASO 5: Convertir los vectores a float32 porque sino faiss no lo lee
@@ -163,13 +179,13 @@ def ask():
         contexto ="\n".join(chunks_textos) #construyo el contexto con lo que hemos recuperado de la base de datos para pasarselo a ollama
         print(contexto) #esto es para verlo en la terminal y comprobar si funciona bien todo
         if Vectores ==True or chunks_textos:
-            prompt_ollama = f"Usa el siguiente contexto para responder a la pregunta de la mejor manera posible.Te llamas P I A y eres un Asistente para contestar preguntes sobre Pdfs que vienen del siguiente contexto. Contesta unicamente en español\n\nContexto:\n{contexto}\n\nPregunta: {pregunta}\n\nRespuesta:"
+            prompt_ollama = f"Usa el siguiente contexto para responder a la pregunta de la mejor manera posible.Te llamas P I A y eres un Asistente para contestar preguntes sobre Pdfs que vienen del siguiente contexto en formato Markdown para un mejor entendimiento. Contesta unicamente en español\n\nContexto:\n{contexto}\n\nPregunta: {pregunta}\n\nRespuesta:"
         else:
             prompt_ollama = f"Responde a la siguiente pregunta de la mejor manera posible.Te llamas P I A y eres un Asistente para contestar preguntes sobre Pdfs, Contesta unicamente en español, No tienes contexto adicional.\n\nPregunta: {pregunta}\n\nRespuesta:"
         print(prompt_ollama)
         url = "http://localhost:11434/api/generate"
         payload = {
-            "model": "phi",
+            "model": "phi3:mini",
             "prompt": prompt_ollama,
             "stream": False
         }
