@@ -1,0 +1,80 @@
+body {
+    background-color: #96b89e;
+    font-family: 'Arial', sans-serif;
+    color: #fbfefb;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* 🔥 CLAVE */
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    animation: entradaZoom 1.5s ease-out;
+}
+
+/* Animación de aparecer desde el centro */
+@keyframes entradaZoom {
+    0% {
+        transform: scale(0.2);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5vh;
+    font-size: 6em;
+
+    /* Curvado tipo "colegio" */
+    transform: perspective(200px) rotateX(10deg);
+    text-align: center;
+}
+
+/* PIA en otro color */
+h1 > span {
+    margin-left: 30px;
+    color: #133b21; /* amarillo tipo colegio */
+    font-weight: bold;
+}
+button {
+    background-color: #133b21;
+    color: #fbfefb;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 12px; /* borde redondeado elegante */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Hover para que tenga vida */
+button:hover {
+    background-color: #0f2e1a;
+    transform: scale(1.05);
+}
+
+/* Animación de entrada (opcional pero queda guapo) */
+button {
+    animation: aparecerBtn 2s ease;
+}
+
+@keyframes aparecerBtn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

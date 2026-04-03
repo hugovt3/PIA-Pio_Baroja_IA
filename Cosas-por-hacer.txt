@@ -1,0 +1,13 @@
+Importante:
+- Mejorar IA (HECHO)
+- Otro .bat para clonar repositorio e instalar lo necesario, de forma que el usuario no tenga que usar ni un solo comando (descargas dos .bat, uno instala todo y el otro ejecuta la app)
+- Mejorar los .bat para que abran los CMD en segundo plano, y hacer algo para que se cierren los servicios automáticamente (quizás botón en el front?)
+-historial de mensajer, variable de actualizacion para que la IA en el prompt tenga el historial guardado
+
+
+Opcional:
+- Añadir opción de ver todos los PDF subidos, y poder eliminar?
+- BBDD en AWS
+- Front más amplio, sobre todo más ancho para las respuestas más largas
+front diferente para desktop y mobile? (muy opcional)
+rediseñar front, que sea más tipo ChatGPT que lo principal es preguntar? (muy opcional)

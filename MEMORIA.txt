@@ -1,0 +1,18 @@
+MEMORIA:
+
+OLLAMA -> modelo PHI absurdo malo y muchas inventadas
+OLLAMA -> modelo de deepseek
+
+BBDD-> sqlite local
+(proceso) BBDD-> AWS
+
+Analisis de pdfs -> Varios analisis de lectura de pdf para encontrar el que mejor pueda adaptarse a nuestra IA
+Analisis de Pdfs -> Encontramos finalmente pymupdf4llm el cual tras varias pruebas funciona correctamente
+
+
+busqueda de datos -> consulta completa de la base de datos
+busqueda de datos -> filtro faiss mejora notable para eficiencia
+
+Avanace front -> modelo basico para que las pruebas fueran fluidas y rapidas
+(proceso) Avance front -> front especializado en un chat de IA con historial de subida haciendo que indirectamente la IA tenga conocimiento de los mensajes anteriores
+

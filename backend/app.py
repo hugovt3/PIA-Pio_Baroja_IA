@@ -2,12 +2,16 @@ from flask import Flask, jsonify, send_from_directory, request, render_template
 import requests
 import os
 from Conexion_DB import get_connection #Importar el metodo para conetarse a la BBDD y poder reutilizar la misma conexión
+from Iniciar_BBDD import inicializar_bd #Importar función para crear BBDD si no existe
+import pdfplumber # Importar pdfplumber para el procesamiento de PDFs (a implementar)
 from Creador_chunks import crear_chunk # Importar la función para crear chunks de texto
 import pymupdf4llm
 from sentence_transformers import SentenceTransformer #Creador de vectores
 import numpy as np #importar numpy para hacer transformaciones en los vectores y que faiss pueda aceptarlos
 import faiss #importar faiss para la búsqueda de similitud entre vectores
 from pathlib import Path
+
+inicializar_bd()
 
 app = Flask(
         __name__,
@@ -48,9 +52,17 @@ except Exception as e:
 
 
 #--------------------------
-#Pagina para servir el frontend principal
+#pagina de bienvenida
 #--------------------------
 @app.route("/")
+def welcome():
+    return send_from_directory(app.template_folder, "welcome.html")
+
+
+#--------------------------
+#Pagina para servir el frontend principal
+#--------------------------
+@app.route("/inicio")
 def home():
     return send_from_directory(app.template_folder, "index.html")
 
@@ -179,19 +191,55 @@ def ask():
         contexto ="\n".join(chunks_textos) #construyo el contexto con lo que hemos recuperado de la base de datos para pasarselo a ollama
         print(contexto) #esto es para verlo en la terminal y comprobar si funciona bien todo
         if Vectores ==True or chunks_textos:
-            prompt_ollama = f"Usa el siguiente contexto para responder a la pregunta de la mejor manera posible.Te llamas P I A y eres un Asistente para contestar preguntes sobre Pdfs que vienen del siguiente contexto en formato Markdown para un mejor entendimiento. Contesta unicamente en español\n\nContexto:\n{contexto}\n\nPregunta: {pregunta}\n\nRespuesta:"
+            prompt_ollama = f"""
+            Te llamas P I A, un asistente que responde preguntas SOLO usando el contexto proporcionado, a no ser, que te pregunten
+            por informacion sobre ti, ahi podrás responder lo que quieras.
+
+            Si hablas sobre contexto, refierete a PDF's, ya que el contexto viene de ahi.
+
+            Reglas:
+            - Si la respuesta NO está en el contexto, di: "No tengo suficiente información para responder"
+            - NO inventes información
+            - Sé claro y directo
+            - Responde en español
+
+            Contexto:
+            {contexto}
+
+            Pregunta:
+            {pregunta}
+            """
         else:
-            prompt_ollama = f"Responde a la siguiente pregunta de la mejor manera posible.Te llamas P I A y eres un Asistente para contestar preguntes sobre Pdfs, Contesta unicamente en español, No tienes contexto adicional.\n\nPregunta: {pregunta}\n\nRespuesta:"
+            prompt_ollama = f"""
+            Te llamas P I A, un asistente que responde preguntas SOLO usando el contexto proporcionado, a no ser, que te pregunten
+            por informacion sobre ti, ahi podrás responder lo que quieras.
+
+            Si hablas sobre contexto, refierete a PDF's, ya que el contexto viene de ahi.
+            Reglas:
+            - Si la respuesta NO está en el contexto, di: "No tengo suficiente información para responder"
+            - NO inventes información
+            - Sé claro y directo
+            - Responde en español
+
+            Contexto:
+            No hay información disponible para responder a esta pregunta. Por lo que contesta que no hay datos suficientes para responder.
+
+            Pregunta:
+            {pregunta}
+            """
         print(prompt_ollama)
         url = "http://localhost:11434/api/generate"
         payload = {
-            "model": "phi3:mini",
+            "model": "deepseek-r1:8b",
             "prompt": prompt_ollama,
             "stream": False
         }
+
         response = requests.post(url, json=payload)
+        print(response)
         data = response.json()
         respuesta_ollama = data.get("response", "").strip()
+        print(respuesta_ollama)
         return jsonify({
             "respuesta": respuesta_ollama
         })
