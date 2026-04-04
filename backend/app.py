@@ -243,36 +243,37 @@ def ask():
         return jsonify({
             "respuesta": respuesta_ollama
         })
-
-
-
-
-
-
-
-
-
-#--------------------------
-#Pagina prueba de ollama
-#--------------------------
-@app.route("/test-ollama") #test de ollama
-def test_ollama():
-    url = "http://localhost:11434/api/generate"
-    payload = {
-        "model": "phi",
-        "prompt": (
-            "Responde exactamente con esta frase, sin añadir nada más:\n"
-            "Ollama funciona correctamente."
-        ),
-        "stream": False
-    }
     
-    response = requests.post(url, json=payload)
-    data = response.json()
+#--------------------------
+#Ruta para servir el nombre de todos los pdfs de la base de datos y mostrarlos en el frontend
+#--------------------------
 
-    return jsonify({
-        "respuesta_ollama": data.get("response", "").strip()
-    })
+# Mostrar PDFs y permitir eliminar
+@app.route("/pdf", methods=["GET", "POST"])
+def listar_pdfs():
+    Conexion = get_connection()
+    Conexion_cursor = Conexion.cursor()
+    if request.method == "POST":
+        filename = request.form.get("filename")
+        if filename:
+            # Eliminar de la base de datos
+            Conexion_cursor.execute("""
+                DELETE FROM chunks 
+                WHERE document_id IN (
+                    SELECT id FROM documents WHERE filename = ?
+                )
+            """, (filename,))
+            Conexion_cursor.execute("DELETE FROM documents WHERE filename = ?", (filename,)) 
+            # Eliminar el archivo físico si existe
+            file_path = os.path.join(RUTA_GUARDAR_PDFS_SERVIDOR, filename)
+            if os.path.exists(file_path):
+                os.remove(file_path)
+            Conexion.commit()
+    Conexion_cursor.execute("SELECT filename FROM documents")
+    pdfs = [fila[0] for fila in Conexion_cursor.fetchall()]
+    Conexion.close()
+    return render_template("pdf.html", pdfs=pdfs)
 
+ 
 if __name__ == "__main__": # Inicio app
     app.run(debug=True)

@@ -10,41 +10,29 @@
     
 </head>
 <body>
+    <aside class="side-menu">
+        <button class="aside-btn active" disabled>Sube tu PDF</button>
+        <a href="/ask"><button class="aside-btn">Pregunta a PIA</button></a>
+        <a href="/pdf"><button class="aside-btn">Pdfs Subidos</button></a>
+        <div class="logo-container">
+            <img src="/Images/Logo.jpg" alt="Logo de PIA" class="logo">
+        </div>
+    </aside>
     <div class="container">
         <h1>Sube tu PDF/s</h1>
-        <!--Formulario basico para introducir los pdfs
-            FORM:
-            -1º: action -> /upload para que envie los archivos a la ruta /upload
-            -2º: enctype -> multipart/form-data para que el formulario pueda manejar archivos
-            INPUT:
-            -1º: type -> file para que solo deje meter archivos
-            -2º: accept -> para que solo deje meter archivos pdf
-            -3º: multiple -> para que deje meter varios archivos a la vez
-            -4º: required -> para que no deje enviar el formulario sin archivos
-        -->
         <form action="/upload" method="post" enctype="multipart/form-data">
-            
             <label>Selecciona uno o varios PDF:</label>
             <input 
-            type="file" 
-            id="pdfs" 
-            name="pdfs"
-            accept="application/pdf"
-            multiple
-            required
+                type="file" 
+                id="pdfs" 
+                name="pdfs"
+                accept="application/pdf"
+                multiple
+                required
             >
-            
             <button type="submit">Subir PDFs</button>
             <button type="button" onclick="LimpiarSubida()">Limpiar selección</button>
-
         </form>
-
-        <div class="link-section">
-            <a href="/ask">Haz una pregunta a PIA!</a>
-            <br>
-            <br>
-            <a href="/test-ollama">Test de ollama</a>
-        </div>
     </div>
 </body>
 </html>
