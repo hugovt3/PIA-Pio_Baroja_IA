@@ -14,5 +14,14 @@ busqueda de datos -> consulta completa de la base de datos
 busqueda de datos -> filtro faiss mejora notable para eficiencia
 
 Avanace front -> modelo basico para que las pruebas fueran fluidas y rapidas
-(proceso) Avance front -> front especializado en un chat de IA con historial de subida haciendo que indirectamente la IA tenga conocimiento de los mensajes anteriores
+Avance front -> front especializado en un chat de IA con historial de subida haciendo que indirectamente la IA tenga conocimiento de los mensajes anteriores
+
+Gestion de la información para la IA -> Cada request iba por separado, la IA no contaba conlas preguntas y respuestas anteriores
+Gestion de la información para la IA -> Ahora la IA tiene conociemiento sobre el contexto de la conversación y lo tiene en cuenta para contestar a la preguntas
+
+
+
+
+
+
 

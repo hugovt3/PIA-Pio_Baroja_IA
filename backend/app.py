@@ -21,6 +21,9 @@ app = Flask(
         )
 
 RUTA_GUARDAR_PDFS_SERVIDOR = os.path.join(os.path.dirname(__file__), "..", "docs")# Ruta absoluta a la carpeta donde se guardarán los PDFs
+PREGUNTAS_USUARIO = [] # Lista para almacenar las preguntas del usuario
+RESPUESTAS_IA = [] # Lista para almacenar las respuestas de la IA
+
 
 #--------------------------
 #Inicializar FAISS
@@ -168,7 +171,7 @@ def ask():
     elif request.method =="POST":
         #1 : Obetener la pregunta del usuario
         pregunta = request.get_json().get("pregunta")
-        print(pregunta)
+        
         #2 : Convertir la pregunta en un vector
         pregunta_vector = model.encode([pregunta]).astype('float32')
         #3 : Buscar los chunks más similares en FAISS
@@ -203,12 +206,18 @@ def ask():
             - NO inventes información
             - Sé claro y directo
             - Responde en español
+            - Estate atento a la historia de la conversación, ya que puede ser relevante para responder a la pregunta actual
+            - Intenta que tus repuestas sean consideradas con el usuario, empaticas y amables, no seas seco ni cortante
 
             Contexto:
             {contexto}
 
             Pregunta:
             {pregunta}
+
+            Historia de la conversación:
+            Usuario: {PREGUNTAS_USUARIO[-2] if len(PREGUNTAS_USUARIO) > 1 else "N/A"}
+            PIA: {RESPUESTAS_IA[-2] if len(RESPUESTAS_IA) > 1 else "N/A"}
             """
         else:
             prompt_ollama = f"""
@@ -221,12 +230,17 @@ def ask():
             - NO inventes información
             - Sé claro y directo
             - Responde en español
+            - Intenta que tus repuestas sean consideradas con el usuario, empaticas y amables, no seas seco ni cortante
 
             Contexto:
             No hay información disponible para responder a esta pregunta. Por lo que contesta que no hay datos suficientes para responder.
 
             Pregunta:
             {pregunta}
+
+            Historia de la conversación:
+            Usuario: {PREGUNTAS_USUARIO[-2] if len(PREGUNTAS_USUARIO) > 1 else "N/A"}
+            PIA: {RESPUESTAS_IA[-2] if len(RESPUESTAS_IA) > 1 else "N/A"}
             """
         print(prompt_ollama)
         url = "http://localhost:11434/api/generate"
@@ -241,6 +255,10 @@ def ask():
         data = response.json()
         respuesta_ollama = data.get("response", "").strip()
         print(respuesta_ollama)
+        PREGUNTAS_USUARIO.append(pregunta) # Guardar la pregunta del usuario en la lista
+        RESPUESTAS_IA.append(respuesta_ollama) # Guardar la respuesta de la IA en la lista
+        print("Preguntas usuario:", PREGUNTAS_USUARIO)
+        print("Respuestas IA:", RESPUESTAS_IA)
         return jsonify({
             "respuesta": respuesta_ollama
         })

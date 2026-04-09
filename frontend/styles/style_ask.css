@@ -1,3 +1,6 @@
+
+
+
 .chat-window {
     /* ...existing code... */
     padding-left: 24px;
@@ -108,6 +111,8 @@ body {
     background: transparent;
     box-shadow: none;
     min-height: 0;
+    position: relative;
+    z-index: 1;
 }
 
 .message {
@@ -163,15 +168,25 @@ body {
     transition: background 0.3s, box-shadow 0.3s;
     box-shadow: 0 1px 4px rgba(0,0,0,0.06);
 }
+.form-chat-container {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
 
 .chat-input-form {
+    border-top: #0f2e1a solid 2px;
     display: flex;
     gap: 12px;
-    padding: 24px 32px 32px 32px;
+    padding: 8px 32px 10px 32px;
     background: transparent;
     position: sticky;
     bottom: 0;
-    z-index: 2;
+    z-index: 10;
 }
 .chat-input-form input[type="text"] {
     flex: 1;
@@ -225,7 +240,7 @@ body {
     color: #133b21;
     box-shadow: 0 4px 24px 0 rgba(76,175,80,0.13), 0 1.5px 8px 0 rgba(0,0,0,0.04);
     border: 1.5px solid #96b89e;
-    padding: 16px 16px 16px 16px;
+    padding: 5px 5px 5px 5px;
     border-bottom: 2px solid #133b21;
     margin-bottom: 16px;
 
@@ -350,4 +365,33 @@ body > .container {
 
 a {
     text-decoration: none;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+    height: 0;
+    width: 0;
+}
+/* Asegurar border-radius en thumb para todos los navegadores */
+::-webkit-scrollbar-thumb {
+    border-radius: 8px !important;
+}
+::-webkit-scrollbar {
+    
+    width: 8px;
+    background: #b6f5b6; /* verde claro */
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    margin-right: 20px;
+    background: #218838; /* verde oscuro */
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-track {
+    margin-right: 20px;
+    background: #b6f5b6; /* verde claro */
+    border-radius: 8px;
 }
