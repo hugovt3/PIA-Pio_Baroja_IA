@@ -212,12 +212,19 @@ body > .container {
     color: #96b89e !important;
 }
 
+.link-imagen{
+    align-items:  center;
+    justify-content: center;
+}
+
 a {
-    display: inline-block;
-    padding: 10px 20px;
-    color: white;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background 0.3s ease;
+}
+
+aside>p {
+    font-size: 1.2em;
     font-weight: bold;
+    color: #133b21;
+    margin-bottom: 24px;
+    text-decoration: underline 3px;
 }

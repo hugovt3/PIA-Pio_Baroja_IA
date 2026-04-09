@@ -8,20 +8,27 @@
     <link rel="stylesheet" href="/styles/style_ask.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Haz una pregunta a PIA</h1>
-        <form id="preguntar-form">
-            <label for="pregunta">Pregunta:</label>
-            <input type="text" id="pregunta" name="pregunta" required>
-            <button type="submit">Enviar</button>
-        </form>
-        <div id="response-section">
-            <h2>Respuesta de PIA:</h2>
-            <p id="respuesta"></p>
-
+    <aside class="side-menu">
+        <p class="aside-title">Menú</p>
+        <a href="/inicio"><button class="aside-btn" >Sube tu PDF</button></a>
+        <a href="/pdf"><button class="aside-btn" >Pdfs Subidos</button></a>
+        <button class="aside-btn active" disabled>Pregunta a PIA</button></a>
+        <div class="logo-container">
+            <a href="/" class="link-imagen"><img src="/Images/Logo.jpg" alt="Logo de PIA" class="logo"></a>
         </div>
-        <a href="/"><button>Volver</button></a>
-    </div>
+    </aside>
+        <div class="chatgpt-style">
+            <div class="chat-header">   
+                <h1>Haz una pregunta a PIA</h1>
+            </div>
+            <div class="chat-window" id="chat-window">
+                <!-- Los mensajes del chat se insertarán aquí dinámicamente -->
+            </div>
+            <form id="preguntar-form" class="chat-input-form" autocomplete="off">
+                <input type="text" id="pregunta" name="pregunta" placeholder="Escribe tu pregunta..." required autocomplete="off">
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
     <script src="../scripts/script_ask.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@ Importante:
 
 
 Opcional:
-- Añadir opción de ver todos los PDF subidos, y poder eliminar?
+- Añadir opción de ver todos los PDF subidos, y poder eliminar? (HECHO)
 - BBDD en AWS
 - Front más amplio, sobre todo más ancho para las respuestas más largas
 front diferente para desktop y mobile? (muy opcional)

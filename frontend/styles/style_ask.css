@@ -1,108 +1,353 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.chat-window {
+    /* ...existing code... */
+    padding-left: 24px;
+    padding-right: 24px;
+}
+.user-message .message-content {
+    /* ...existing code... */
+    margin-left: 8px;
+    margin-right: auto;
+}
+.pia-message .message-content {
+    /* ...existing code... */
+    margin-right: 8px;
+    margin-left: auto;
+}
+/* Logo pequeño y abajo del aside */
+.logo-container {
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
+    flex: 1;
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
     height: 100vh;
-}
-
-/* ----------------------------
-   Contenedor central
----------------------------- */
-.container {
-    background-color: #ffffff;
-    padding: 30px 40px;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-}
-
-/* ----------------------------
-   Titulos
----------------------------- */
-h1 {
-    margin-bottom: 20px;
-    color: #667eea;
-}
-
-h2 {
-    margin-top: 30px;
-    color: #555;
-    font-size: 1.1em;
-}
-
-/* ----------------------------
-   Formulario
----------------------------- */
-form {
+    width: 240px;
+    background: #fbfefb;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+    z-index: 10;
+    padding-top: 40px;
+    box-shadow: 2px 0 16px rgba(0,0,0,0.06);
+    position: relative;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-label {
-    text-align: left;
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #96b89e, #133b21); /* igual que welcome */
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.chatgpt-style {
+    position: absolute;
+    left: 240px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+.chatgpt-style h1 {
+    text-align: center;
+    margin: 0 auto;
+    padding: 32px 0 24px 0;
+    font-size: 2rem;
     font-weight: bold;
-    color: #333;
-}
-
-input[type="text"] {
-    padding: 10px 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1em;
-    outline: none;
-    transition: border-color 0.2s;
-}
-
-/* ----------------------------
-   Botones
----------------------------- */
-button {
-    padding: 12px 20px;
+    color: #133b21;
+    background: transparent;
     border: none;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.chat-window {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow-y: auto;
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    background: transparent;
+    box-shadow: none;
+    min-height: 0;
+}
+
+.message {
+    display: flex;
+    margin-bottom: 4px;
+    width: 100%;
+}
+.user-message {
+    justify-content: flex-start;
+}
+.pia-message {
+    justify-content: flex-end;
+}
+.user-message .message-content {
+    background: #e0f7e9;
+    color: #133b21;
+    border-bottom-left-radius: 4px;
+    border-radius: 18px 18px 18px 4px;
+    margin-left: 16px;
+    margin-right: auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    max-width: 40vw;
+    min-width: 60px;
+    padding: 18px 28px;
+    font-size: 1.08rem;
+    line-height: 1.6;
+    font-family: 'Segoe UI', 'Arial Rounded MT Bold', Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 2px rgba(150,200,170,0.08);
+    transition: background 0.3s, box-shadow 0.3s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+.pia-message .message-content {
+    background: #dbeafe;
+    color: #1e293b;
+    border-bottom-right-radius: 4px;
+    border-radius: 18px 18px 4px 18px;
+    margin-right: 16px;
+    margin-left: auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    max-width: 40vw;
+    min-width: 60px;
+    padding: 18px 28px;
+    font-size: 1.08rem;
+    line-height: 1.6;
+    font-family: 'Segoe UI', 'Arial Rounded MT Bold', Arial, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 2px rgba(120,160,220,0.08);
+    transition: background 0.3s, box-shadow 0.3s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.chat-input-form {
+    display: flex;
+    gap: 12px;
+    padding: 24px 32px 32px 32px;
+    background: transparent;
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+}
+.chat-input-form input[type="text"] {
+    flex: 1;
+    padding: 12px;
     border-radius: 8px;
-    font-size: 1em;
+    border: 1px solid #b5c9b8;
+    font-size: 1.08rem;
+    font-family: 'Segoe UI', 'Arial Rounded MT Bold', Arial, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: #133b21;
+    box-shadow: 0 1px 4px rgba(150,200,170,0.07);
+    outline: none;
+    background: #f8fafc;
+    transition: border 0.2s;
+}
+.chat-input-form input[type="text"]:focus {
+    border: 1.5px solid #133b21;
+}
+.chat-input-form button {
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    background: #b6e7c9;
+    color: #133b21;
+    font-weight: bold;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 4px rgba(150,200,170,0.10);
+}
+.chat-input-form button:hover {
+    background: #7ed957;
+    color: #19be53;
+    box-shadow: 0 2px 8px rgba(126,217,87,0.13);
 }
 
-/* Botón principal de enviar */
-button[type="submit"] {
-    background-color: #6b5bff; /* azul morado */
-    color: white;
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-160px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.chat-header {
+    display: flex;
+    background: linear-gradient(90deg, #b6e7c9 60%, #7ed957 100%);
+    color: #133b21;
+    box-shadow: 0 4px 24px 0 rgba(76,175,80,0.13), 0 1.5px 8px 0 rgba(0,0,0,0.04);
+    border: 1.5px solid #96b89e;
+    padding: 16px 16px 16px 16px;
+    border-bottom: 2px solid #133b21;
+    margin-bottom: 16px;
+
 }
 
-button[type="submit"]:hover {
-    background-color: #5a48e0;
+h1 {
+    color: #133b21;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 3em;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
-/* Respuesta */
-#response-section {
-    margin-top: 20px;
-    text-align: left;
+button {
+    padding: 12px 28px;
+    background-color: #133b21;
+    color: #fbfefb;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    display: block;
 }
 
-#respuesta {
-    background-color: #f7f7f7;
-    padding: 10px;
-    border-radius: 8px;
-    min-height: 40px;
+button:hover:not(:disabled) {
+    background-color: #0f2e1a;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(19, 59, 33, 0.18);
 }
 
-/* ----------------------------
-   Botones secundarios (si existen)
----------------------------- */
-button.secondary {
-    background-color: #28a745; /* verde */
-    color: white;
+button:active {
+    transform: scale(1);
 }
 
-button.secondary:hover {
-    background-color: #218838;
+
+/* ASIDE MENU */
+aside>p {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #133b21;
+    margin-bottom: 24px;
+    text-decoration: underline 3px;
+}
+
+image.logo {
+    position: absolute;
+    bottom: 20px;
+    width: 80px;
+    height: auto;
+}
+.side-menu {
+    border-right: #133b21 solid 2px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 240px;
+    background: #fbfefb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+    z-index: 10;
+    padding-top: 40px;
+}
+
+body > .container {
+    margin-left: 260px;
+}
+
+
+.aside-btn {
+    background-color: #133b21;
+    color: #fbfbfb;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 32px;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    min-width: 180px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* Botón útil: Pregunta a PIA */
+.aside-btn.ask {
+    background-color: #133b21;
+    color: #fbfbfb;
+}
+.aside-btn.ask:hover {
+    transform: scale(1.07);
+    background-color: #133b21;
+    color: #fbfbfb;
+}
+
+.aside-btn.active, .aside-btn:disabled {
+    background-color: #96b89e;
+    color: #fbfbfb;
+    cursor: default;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transform: none;
+}
+
+.aside-btn:hover:not(:disabled) {
+    transform: scale(1.07);
+}
+
+/* Cuando estamos en /ask, el botón de Pregunta a PIA se pone verde oscuro */
+.aside-btn.selected {
+    background-color: #96b89e !important;
+    color: #96b89e !important;
+}
+
+a {
+    text-decoration: none;
 }

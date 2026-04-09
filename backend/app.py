@@ -168,6 +168,7 @@ def ask():
     elif request.method =="POST":
         #1 : Obetener la pregunta del usuario
         pregunta = request.get_json().get("pregunta")
+        print(pregunta)
         #2 : Convertir la pregunta en un vector
         pregunta_vector = model.encode([pregunta]).astype('float32')
         #3 : Buscar los chunks más similares en FAISS
