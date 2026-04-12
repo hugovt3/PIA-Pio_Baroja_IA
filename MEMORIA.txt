@@ -4,7 +4,7 @@ OLLAMA -> modelo PHI absurdo malo y muchas inventadas
 OLLAMA -> modelo de deepseek
 
 BBDD-> sqlite local
-(proceso) BBDD-> AWS
+(proceso) BBDD-> AWS con MySql
 
 Analisis de pdfs -> Varios analisis de lectura de pdf para encontrar el que mejor pueda adaptarse a nuestra IA
 Analisis de Pdfs -> Encontramos finalmente pymupdf4llm el cual tras varias pruebas funciona correctamente
