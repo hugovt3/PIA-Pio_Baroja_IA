@@ -1,3 +1,8 @@
+
+#
+# OLD - cuando la BBDD era local
+#
+
 from Conexion_DB import get_connection #Importar el metodo para conetarse a la BBDD y poder reutilizar la misma conexión
 
 Conexion = get_connection()

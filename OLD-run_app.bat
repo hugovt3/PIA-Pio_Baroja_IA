@@ -1,4 +1,6 @@
-REM Guarda las variables de entorno para AWS
+
+REM OLD - cuando la BBDD era local
+
 REM Comprueba que estás en la carpeta correcta
 REM Crea data/ si no existe
 REM Crea la base de datos automáticamente
@@ -12,25 +14,6 @@ REM Abre el navegador automáticamente
 @echo off
 title PIA - Lanzador completo
 color 0A
-
-REM ---------------------------------
-REM Variables de entorno AWS RDS
-REM ---------------------------------
-echo Configurando variables de entorno...
-
-set DB_HOST=pia-db-aws.caqi1nngjk8d.us-east-1.rds.amazonaws.com
-set DB_USER=admin
-set DB_PASSWORD=admin-pia-db-aws
-set DB_NAME=pia_db
-
-REM Guardarlas permanentemente para futuras ejecuciones
-setx DB_HOST "pia-db-aws.caqi1nngjk8d.us-east-1.rds.amazonaws.com" >nul
-setx DB_USER "admin" >nul
-setx DB_PASSWORD "admin-pia-db-aws" >nul
-setx DB_NAME "pia_db" >nul
-
-echo Variables configuradas correctamente
-echo.
 
 echo ===============================
 echo     INICIANDO APLICACION PIA
@@ -48,15 +31,24 @@ if not exist backend (
 )
 
 REM ---------------------------------
-REM 2. Inicializar base de datos en AWS RDS
+REM 2. Crear base de datos si no existe
 REM ---------------------------------
-echo [1/5] Comprobando base de datos en AWS RDS...
+echo [1/5] Comprobando base de datos...
 
-cd backend
-python Iniciar_BBDD.py
-cd ..
+if not exist data (
+    echo Carpeta data no existe. Creandola...
+    mkdir data
+)
 
-echo Base de datos inicializada (o ya existente en RDS)
+if not exist data\data.db (
+    echo Base de datos no encontrada. Creandola...
+    cd backend
+    python Iniciar_BBDD.py
+    cd ..
+) else (
+    echo Base de datos ya existe
+)
+
 echo.
 
 REM ---------------------------------

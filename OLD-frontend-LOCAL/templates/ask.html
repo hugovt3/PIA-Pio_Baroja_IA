@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIA - Chat</title>
+    <link rel="icon" href="/Images/Logo.jpg" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/style_ask.css">
+</head>
+<body>
+    <aside class="side-menu">
+        <p class="aside-title">Menú</p>
+        <a href="/inicio"><button class="aside-btn" >Sube tu PDF</button></a>
+        <a href="/pdf"><button class="aside-btn" >Pdfs Subidos</button></a>
+        <button class="aside-btn active" disabled>Pregunta a PIA</button></a>
+        <div class="logo-container">
+            <a href="/" class="link-imagen"><img src="/Images/Logo.jpg" alt="Logo de PIA" class="logo"></a>
+        </div>
+    </aside>
+        <div class="chatgpt-style">
+            <div class="chat-header">   
+                <h1>Haz una pregunta a PIA</h1>
+            </div>
+            <div class="chat-window" id="chat-window">
+                <!-- Los mensajes del chat se insertarán aquí dinámicamente -->
+            </div>
+            <div class="form-chat-container">
+                <form id="preguntar-form" class="chat-input-form" autocomplete="off">
+                    <input type="text" id="pregunta" name="pregunta" placeholder="Escribe tu pregunta..." required autocomplete="off">
+                    <button type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+    <script src="../scripts/script_ask.js"></script>
+</body>
+</html>

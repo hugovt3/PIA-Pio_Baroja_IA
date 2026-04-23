@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>PIA - Asistente virtual</title>
+    <link rel="stylesheet" href="/styles/style_index.css">
+    <script src="../scripts/script_index.js"></script>
+    <link rel="icon" href="/Images/Logo.jpg" type="image/x-icon">
+    
+</head>
+<body>
+    <aside class="side-menu">
+        <p class="aside-title">Menú</p>
+        <button class="aside-btn active" disabled>Sube tu PDF</button>
+        <a href="/pdf"><button class="aside-btn">Pdfs Subidos</button></a>
+        <a href="/ask"><button class="aside-btn">Pregunta a PIA</button></a>
+        <div class="logo-container">
+            <a href="/" class="link-imagen"><img src="/Images/Logo.jpg" alt="Logo de PIA" class="logo"></a>
+        </div>
+    </aside>
+    <div class="container">
+        <h1>Sube tu PDF/s</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <label>Selecciona uno o varios PDF:</label>
+            <input 
+                type="file" 
+                id="pdfs" 
+                name="pdfs"
+                accept="application/pdf"
+                multiple
+                required
+            >
+            <button type="submit">Subir PDFs</button>
+            <button type="button" onclick="LimpiarSubida()">Limpiar selección</button>
+        </form>
+    </div>
+</body>
+</html>

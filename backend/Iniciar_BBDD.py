@@ -1,34 +1,36 @@
-import sqlite3
+import mysql.connector
 import os
 
 def inicializar_bd():
-    Ruta_BBDD = os.path.join(os.path.dirname(__file__), "../data/data.db")
+    conexion = mysql.connector.connect(
+        host=os.getenv("DB_HOST"),
+        user=os.getenv("DB_USER"),
+        password=os.getenv("DB_PASSWORD"),
+        database=os.getenv("DB_NAME"),
+        port=3306
+    )
 
-    # Crear carpeta si no existe
-    os.makedirs(os.path.dirname(Ruta_BBDD), exist_ok=True)
-
-    conexion = sqlite3.connect(Ruta_BBDD)
     cursor = conexion.cursor()
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS documents (
-        ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        ID INT AUTO_INCREMENT PRIMARY KEY,
         filename TEXT,
-        fecha_subida DATETIME DEFAULT CURRENT_TIMESTAMP
+        fecha_subida TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
     """)
 
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS chunks (
-        ID INTEGER PRIMARY KEY AUTOINCREMENT,
-        document_id INTEGER,
-        chunk_text TEXT, 
-        chunk_vector BLOB, 
-        FOREIGN KEY(document_id) REFERENCES documents(id)
+        ID INT AUTO_INCREMENT PRIMARY KEY,
+        document_id INT,
+        chunk_text TEXT,
+        chunk_vector LONGBLOB,
+        FOREIGN KEY(document_id) REFERENCES documents(ID)
     )
     """)
 
     conexion.commit()
     conexion.close()
 
-    print("Base de datos lista")
+    print("Base de datos lista en AWS RDS")

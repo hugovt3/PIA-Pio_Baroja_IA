@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carga Exitosa</title>
+    <link rel="stylesheet" href="/styles/style_upload_success.css">
+    <link rel="icon" href="/Images/Correct.png" type="image/x-icon">
+</head>
+<body>
+    <aside class="side-menu">
+        <button class="aside-btn active" disabled>Sube tu PDF</button>
+        <a href="/ask"><button class="aside-btn ask">Pregunta a PIA</button></a>
+        <a href="/pdf"><button class="aside-btn">Pdfs Subidos</button></a>
+        <div class="logo-container">
+            <img src="/Images/Logo.jpg" alt="Logo de PIA" class="logo">
+        </div>
+    </aside>
+    <div class="container">
+        <div class="checkmark">✓</div>
+        <h1>¡PDFs subidos correctamente!</h1>
+        <p>Archivos guardados:</p>
+        <ul>
+            {% for a in archivos %}
+            <li>{{ a }}</li>
+            {% endfor %}
+        </ul>
+        <a href="/">Volver al inicio</a>
+    </div>
+</body>
+</html>

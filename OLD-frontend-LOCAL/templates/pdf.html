@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIA - PDFs subidos</title>
+    <link rel="stylesheet" href="/styles/style_index.css">
+    <link rel="icon" href="/Images/Logo.jpg" type="image/x-icon">
+</head>
+<body>
+    <aside class="side-menu">
+        <p class="aside-title">Menú</p>
+        <a href="/inicio"><button class="aside-btn">Sube tu PDF</button></a>
+        <button class="aside-btn active" disabled>Pdfs Subidos</button>
+        <a href="/ask"><button class="aside-btn">Pregunta a PIA</button></a>
+        <div class="logo-container">
+            <a href="/" class="link-imagen"><img src="/Images/Logo.jpg" alt="Logo de PIA" class="logo"></a>
+        </div>
+    </aside>
+    <div class="container">
+        <h1>PDFs subidos</h1>
+        {% if pdfs and pdfs|length > 0 %}
+        <ul style="width:100%;margin-top:20px;">
+            {% for pdf in pdfs %}
+                <li style="color:#133b21;font-size:1.1em;padding:10px 0;border-bottom:1px solid #e0e0e0;list-style:disc inside;display:flex;align-items:center;justify-content:space-between;">
+                    <span>{{ pdf }}</span>
+                    <form method="post" style="display:inline;">
+                        <input type="hidden" name="filename" value="{{ pdf }}">
+                        <button type="submit" class="main-btn" style="padding:6px 18px;font-size:0.95em;margin:0 0 0 16px;">Eliminar</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p style="color:#888;margin-top:30px;">No hay PDFs subidos.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

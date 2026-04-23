@@ -1,0 +1,177 @@
+/* Quitar subrayado de los enlaces */
+a {
+    text-decoration: none;
+}
+/* ASIDE MENU (copiado de style_index.css) */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 240px;
+    background: #fbfefb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+    z-index: 10;
+    padding-top: 40px;
+    box-shadow: 2px 0 16px rgba(0,0,0,0.06);
+}
+
+body > .container {
+    margin-left: 260px;
+}
+
+.aside-btn {
+    background-color: #133b21;
+    color: #fbfbfb;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 32px;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    min-width: 180px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* Botón útil: Pregunta a PIA */
+.aside-btn.ask {
+    background-color: #133b21;
+    color: #fbfbfb;
+}
+.aside-btn.ask:hover {
+    transform: scale(1.07);
+    background-color: #133b21;
+    color: #fbfbfb;
+}
+
+.aside-btn.active, .aside-btn:disabled {
+    background-color: #96b89e;
+    color: #fbfbfb;
+    cursor: default;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transform: none;
+}
+
+/* Botón principal para volver al inicio */
+.main-btn {
+    padding: 12px 28px;
+    background-color: #133b21;
+    color: #fbfefb;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    display: block;
+}
+.main-btn:hover:not(:disabled) {
+    background-color: #0f2e1a;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(19, 59, 33, 0.18);
+}
+body {
+    background: linear-gradient(to bottom, #96b89e, #133b21); /* degradado suave */
+    font-family: 'Arial', sans-serif;
+    color: #fbfefb;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    animation: entradaZoom 1.5s ease-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Animación de aparecer desde el centro */
+@keyframes entradaZoom {
+    0% {
+        transform: scale(0.2);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 5vh;
+    font-size: 6em;
+    /* Curvado tipo "colegio" */
+    transform: perspective(200px) rotateX(10deg);
+}
+
+/* PIA en otro color */
+h1 > span {
+    text-align: center;
+    margin-left: 30px;
+    color: #133b21; /* amarillo tipo colegio */
+    font-weight: bold;
+}
+button {
+    text-align: center;
+    background-color: #133b21;
+    color: #fbfefb;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border-radius: 12px; /* borde redondeado elegante */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+    margin: 20px auto;
+}
+/* Centrar el h3 */
+h3 {
+    text-align: center;
+}
+
+/* Hover para que tenga vida */
+button:hover {
+    background-color: #0f2e1a;
+    transform: scale(1.05);
+}
+
+/* Animación de entrada (opcional pero queda guapo) */
+button {
+    animation: aparecerBtn 2s ease;
+}
+
+@keyframes aparecerBtn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+::-webkit-scrollbar {
+    width: 0px;
+}

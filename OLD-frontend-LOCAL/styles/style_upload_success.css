@@ -1,0 +1,249 @@
+/* Logo pequeño y abajo del aside */
+.logo-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex: 1;
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 240px;
+    background: #fbfefb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+    z-index: 10;
+    padding-top: 40px;
+    box-shadow: 2px 0 16px rgba(0,0,0,0.06);
+    position: relative;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to bottom, #96b89e, #133b21); /* igual que welcome */
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: #fbfefb;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.18);
+    padding: 40px 48px;
+    max-width: 500px;
+    width: 100%;
+    animation: slideIn 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-160px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h1 {
+    color: #133b21;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 3em;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+button {
+    padding: 12px 28px;
+    background-color: #133b21;
+    color: #fbfefb;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+button:hover:not(:disabled) {
+    background-color: #0f2e1a;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(19, 59, 33, 0.18);
+}
+
+button:active {
+    transform: scale(1);
+}
+
+
+/* ASIDE MENU */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 240px;
+    background: #fbfefb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 24px;
+    z-index: 10;
+    padding-top: 40px;
+}
+
+body > .container {
+    margin-left: 260px;
+}
+
+
+.aside-btn {
+    background-color: #133b21;
+    color: #fbfbfb;
+    border: none;
+    border-radius: 12px;
+    padding: 16px 32px;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    min-width: 180px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+/* Botón útil: Pregunta a PIA */
+.aside-btn.ask {
+    background-color: #133b21;
+    color: #fbfbfb;
+}
+.aside-btn.ask:hover {
+    transform: scale(1.07);
+    background-color: #133b21;
+    color: #fbfbfb;
+}
+
+.aside-btn.active, .aside-btn:disabled {
+    background-color: #96b89e;
+    color: #fbfbfb;
+    cursor: default;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transform: none;
+}
+
+.aside-btn:hover:not(:disabled) {
+    transform: scale(1.07);
+}
+
+/* Cuando estamos en /ask, el botón de Pregunta a PIA se pone verde oscuro */
+.aside-btn.selected {
+    background-color: #96b89e !important;
+    color: #96b89e !important;
+}
+
+a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    font-weight: bold;
+}
+
+/* antes despues --------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+ul {
+    list-style: none;
+    margin: 20px 0;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 5px;
+}
+
+li {
+    color: #333;
+    padding: 10px;
+    margin: 5px 0;
+    background: #e7f3ff;
+    border-left: 4px solid #667eea;
+    text-align: left;
+    border-radius: 3px;
+}
+
+div>a {
+    background-color: #133b21;
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 30px;
+    color: #fbfefb;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+    font-weight: bold;
+}
+
+div>a:hover {
+    transform: scale(1.07);
+    background: #133b21;
+}
+
+.checkmark {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    background: #28a745;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: white;
+}

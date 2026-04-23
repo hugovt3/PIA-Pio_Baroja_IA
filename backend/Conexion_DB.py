@@ -1,12 +1,17 @@
-import sqlite3
+import mysql.connector
 import os
 
-Ruta_BBDD = os.path.join(os.path.dirname(__file__), "../data/data.db")
 
 def get_connection():
-    Devolucion= None
+    connection = None
     try:
-        Devolucion= sqlite3.connect(Ruta_BBDD)
-    except sqlite3.Error as e:
+        connection = mysql.connector.connect(
+            host=os.getenv("DB_HOST"),        # endpoint de AWS RDS
+            user=os.getenv("DB_USER"),        # usuario MySQL
+            password=os.getenv("DB_PASSWORD"),# contraseña
+            database=os.getenv("DB_NAME"),    # nombre de la base de datos
+            port=3306
+        )
+    except mysql.connector.Error as e:
         print(f"Error al conectar a la base de datos: {e}")
-    return Devolucion
+    return connection
