@@ -126,4 +126,14 @@ cd backend
 start http://127.0.0.1:5000
 python app.py
 
+echo.
+echo Pulsa una tecla para cerrar TODO...
+pause > nul
+
+echo Cerrando procesos...
+
+taskkill /f /im python.exe
+taskkill /f /im ollama.exe
+
+echo Todo cerrado.
 pause
