@@ -24,9 +24,8 @@ RUTA_GUARDAR_PDFS_SERVIDOR = os.path.join(os.path.dirname(__file__), "..", "docs
 PREGUNTAS_USUARIO = []
 RESPUESTAS_IA = []
 
-# --------------------------
+
 # FAISS
-# --------------------------
 model = SentenceTransformer('all-MiniLM-L6-v2')
 faiss_index = faiss.IndexFlatL2(384)
 Vectores = True
@@ -53,9 +52,8 @@ try:
 except Exception as e:
     print(f"Error FAISS: {e}")
 
-# --------------------------
+
 # RUTAS
-# --------------------------
 @app.route("/")
 def welcome():
     return send_from_directory(app.template_folder, "welcome.html")
@@ -64,9 +62,8 @@ def welcome():
 def home():
     return send_from_directory(app.template_folder, "index.html")
 
-# --------------------------
+
 # SUBIDA PDFs
-# --------------------------
 @app.route("/upload", methods=["POST"])
 def upload_pdfs():
     pdf_files = request.files.getlist("pdfs")
@@ -82,7 +79,6 @@ def upload_pdfs():
         save_path = os.path.join(RUTA_GUARDAR_PDFS_SERVIDOR, pdf.filename)
         pdf.save(save_path)
 
-        # INSERT AWS
         cursor.execute(
             "INSERT INTO documents (filename) VALUES (%s)",
             (pdf.filename,)
@@ -90,7 +86,7 @@ def upload_pdfs():
 
         Id_document = cursor.lastrowid
 
-        # ----------- PROCESAR PDF -----------
+        # PROCESAR PDF
         pdf_path = Path(save_path)
 
         try:
@@ -113,7 +109,7 @@ def upload_pdfs():
             print(f"Error pymupdf4llm: {e}")
             text = ""
 
-        # ----------- CHUNKS -----------
+        # CHUNKS
         chunks = crear_chunk(text)
 
         vectores = model.encode(chunks)
@@ -133,9 +129,8 @@ def upload_pdfs():
 
     return render_template("upload_success.html", archivos=saved_files)
 
-# --------------------------
-# ASK
-# --------------------------
+
+# PREGUNTAS
 @app.route("/ask", methods=["GET", "POST"])
 def ask():
     if request.method == "GET":
@@ -191,8 +186,7 @@ def ask():
 
     return jsonify({"respuesta": respuesta})
 
-# --------------------------
+
 # MAIN
-# --------------------------
 if __name__ == "__main__":
     app.run(debug=True)

@@ -5,7 +5,7 @@ def get_connection():
     connection = None
     try:
         connection = mysql.connector.connect(
-            #Coge las variables de entorno para la BBDD del archivo run_app.bat
+            # Coge las variables de entorno para la BBDD del archivo run_app.bat
             host=os.getenv("DB_HOST"),
             user=os.getenv("DB_USER"),
             password=os.getenv("DB_PASSWORD"),
